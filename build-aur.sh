@@ -1,53 +1,63 @@
 #!/usr/bin/env bash
 
-## Copyright (C) 2020-2021 Aditya Shakya <adi1090x@gmail.com>
-## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
-
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+##
 ## This script will download and build AUR pkgs.
 
 ## ANSI Colors (FG & BG)
-RED="$(printf '\033[31m')"  GREEN="$(printf '\033[32m')"  ORANGE="$(printf '\033[33m')"  BLUE="$(printf '\033[34m')"
-MAGENTA="$(printf '\033[35m')"  CYAN="$(printf '\033[36m')"  WHITE="$(printf '\033[37m')" BLACK="$(printf '\033[30m')"
-
+RED="$(printf '\033[31m')"      GREEN="$(printf '\033[32m')"
+ORANGE="$(printf '\033[33m')"   BLUE="$(printf '\033[34m')"
+MAGENTA="$(printf '\033[35m')"  CYAN="$(printf '\033[36m')"
+WHITE="$(printf '\033[37m')"    BLACK="$(printf '\033[30m')"
+  
 ## Packages
 DIR="$(pwd)"
 PKGDIR="$DIR/packages_aur"
 
-LIST=(#archlinux-appstream-data-pamac
-	  blight
-	  berry
+LIST=(blight
 	  cava
-	  #colorpicker
 	  ksuperkey
-	  #libpamac-full
-	  #pamac-all
-	  #pyroom
-	  #snapd
-	  #snapd-glib
 	  toilet
-	  #tty-clock
 	  unimatrix-git
 	  xfce-polkit
-	  wlr-randr
-	  newm-git
-	  #ckbcomp
-	  #mkinitcpio-openswap
+	  ckbcomp
+	  mkinitcpio-openswap
+	  mkinitcpio-firmware
+	  ast-firmware
+	  aic94xx-firmware
+	  upd72020x-fw
+	  wd719x-firmware
 	  i3lock-color
 	  betterlockscreen
-	  #networkmanager-dmenu-git
+	  networkmanager-dmenu-git
 	  obmenu-generator
 	  perl-linux-desktopfiles
-	  #polybar
-	  #yay
-	  #picom-ibhagwan-git
-	  #timeshift
-	  #downgrade
-	  #pygtk
-	  #libglade
-	  #python2-gobject2
+	  berry
+	  wayfire
+	  wf-config
+	  newm-atha-git
+	  python-thefuzz
+	  python-dasbus
+	  python-imageio
+	  wlr-randr
+	  wlogout
+	  yay
+	  picom-ibhagwan-git
+	  timeshift
+	  downgrade
+	  mugshot
+	  gtk3-nocsd-git
+	  simplescreenrecorder
+	  rofi-lbonn-wayland-git
+	  sddm-git
+	  wdisplays
+	  swayfx
+	  swaylock-effects
+	  evilwm
+	  cwm
 	  )
 
-# Sort packages
+## Sort packages
 PKGS=(`for i in "${LIST[@]}"; do echo $i; done | sort`)
 _pkgs=()
 _failed=()
@@ -81,7 +91,7 @@ exit_on_signal_SIGTERM () {
 trap exit_on_signal_SIGINT SIGINT
 trap exit_on_signal_SIGTERM SIGTERM
 
-# Download AUR packages
+## Download AUR packages
 download_pkgs () {
 	{ echo -e ${BLUE}"\n[*] Downloadind AUR packages...\n"; reset_color; }
 	mkdir -p "$DIR"/0_aur_pkgs && cd "$DIR"/0_aur_pkgs
@@ -107,7 +117,7 @@ download_pkgs () {
 	fi
 }
 
-# Chech for new version
+## Chech for new version
 check_ver () {
 	{ echo -e ${BLUE}"[*] Checking for new AUR packages...\n"; reset_color; }
 	cd "$DIR"/0_aur_pkgs
@@ -137,7 +147,7 @@ check_ver () {
 	done
 }
 
-# Build Updated AUR packages
+## Build Updated AUR packages
 build_new_pkgs () {
 
 	if [[ ! -d "$PKGDIR" ]]; then
@@ -169,7 +179,7 @@ build_new_pkgs () {
 	fi
 }
 
-# Build All AUR packages
+## Build All AUR packages
 build_pkgs () {
 
 	if [[ ! -d "$PKGDIR" ]]; then
@@ -201,7 +211,7 @@ build_pkgs () {
 	fi
 }
 
-# Cleanup
+## Cleanup
 cleanup () {
 	{ echo -e ${BLUE}"[*] Cleaning up..."; reset_color; }
 	rm -rf "$DIR"/0_aur_pkgs
@@ -212,7 +222,7 @@ cleanup () {
 	fi	
 }
 
-# Main
+## Main
 if [[ -n "$1" ]]; then
 	download_pkgs
 	if [[ "$1" == "--new" ]]; then
