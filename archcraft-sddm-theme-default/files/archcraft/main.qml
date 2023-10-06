@@ -211,37 +211,6 @@ Pane {
             ]
         }
 
-        Image {
-            id: backgroundImage
-
-            height: parent.height
-            width: config.HaveFormBackground == "true" && config.FormPosition != "center" && config.PartialBlur != "true" ? parent.width - formBackground.width : parent.width
-            anchors.left: leftleft ||
-                          leftcenter ?
-                                formBackground.right : undefined
-
-            anchors.right: rightright ||
-                           rightcenter ?
-                                formBackground.left : undefined
-
-            horizontalAlignment: config.BackgroundImageHAlignment == "left" ?
-                                 Image.AlignLeft :
-                                 config.BackgroundImageHAlignment == "right" ?
-                                 Image.AlignRight : Image.AlignHCenter
-
-            verticalAlignment: config.BackgroundImageVAlignment == "top" ?
-                               Image.AlignTop :
-                               config.BackgroundImageVAlignment == "bottom" ?
-                               Image.AlignBottom : Image.AlignVCenter
-
-            source: config.background || config.Background
-            fillMode: config.ScaleImageCropped == "true" ? Image.PreserveAspectCrop : Image.PreserveAspectFit
-            asynchronous: true
-            cache: true
-            clip: true
-            mipmap: true
-        }
-
         MouseArea {
             anchors.fill: backgroundImage
             onClicked: parent.forceActiveFocus()

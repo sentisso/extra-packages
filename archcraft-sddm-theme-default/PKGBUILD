@@ -1,6 +1,6 @@
-# Maintainer: Aditya Shakya <adi1090x@gmail.com>
+# Maintainer: sentisso
 
-pkgname=archcraft-sddm-theme-default
+pkgname=archcraft-sddm-theme
 pkgver=1.0
 pkgrel=2
 pkgdesc="Default sddm theme for Archcraft"

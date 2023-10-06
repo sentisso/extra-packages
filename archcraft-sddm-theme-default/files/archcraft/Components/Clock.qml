@@ -31,14 +31,6 @@ Column {
     width: parent.width / 2
 
     Label {
-        anchors.horizontalCenter: parent.horizontalCenter
-        font.pointSize: config.HeaderText !=="" ? root.font.pointSize * 3 : 0
-        color: root.palette.text
-        renderType: Text.QtRendering
-        text: config.HeaderText
-    }
-
-    Label {
         id: timeLabel
         anchors.horizontalCenter: parent.horizontalCenter
         font.pointSize: root.font.pointSize * 3
